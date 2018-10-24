@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const call = require('./routes/call.route'); // Imports routes for the products
 const app = express();
-
+var cors = require('cors');
 // Set up mongoose connection
 const mongoose = require('mongoose');
 let dev_db_url = 'mongodb://sampleuser:abc123@ds133104.mlab.com:33104/swqdb1';
@@ -15,7 +15,7 @@ mongoose.Promise = global.Promise;
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
+app.use(cors);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/calls', call);
